@@ -57,10 +57,11 @@ def getFacebookPageMessageFromFacebookAPI(token, pageid):
 def generateWordCloud(pageid,data):
     wc = WordCloud(max_font_size=75, max_words=100,width=500, height=400,collocations=False,
                 background_color='white',scale=1,relative_scaling=0.5).generate(str(data))
+    dir_path = os.path.dirname(os.path.realpath(__file__))
     filename = pageid+'_wordcloud.png'
     plt.imshow(wc,interpolation='bilinear')
     plt.axis("off")
-    plt.savefig('static/'+filename)
+    plt.savefig(dir_path+'/static/'+filename)
     plt.clf()
     return os.path.join('static', filename)
 
@@ -78,9 +79,10 @@ def performSentimentAnalysis(pageid,data):
 
     lists = sorted(summary.items())
     x, y = zip(*lists)
+    dir_path = os.path.dirname(os.path.realpath(__file__))
     filename = pageid+'_chart.png'
     plt.bar(x, y)
-    plt.savefig('static/'+filename)
+    plt.savefig(dir_path+'/static/'+filename)
     plt.clf()
     return os.path.join('static', filename)
 
